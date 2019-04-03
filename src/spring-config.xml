@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- 驱动基于注解配置(使程序可以识别代码中的注解) -->
+	<context:annotation-config/>
+	<!-- 指定需要扫描为bean组件的包(扫描指定包里的注解) -->
+	<context:component-scan base-package="com.wust"/>
+	
+	<!-- 读取配置文件(读取的数据库配置文件jdbc.properties) -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:jdbc.properties"></property>
+	</bean>
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- 读取数据库库配置文件中的信息 -->
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	<!-- 配置SqlSessionFactroy -->
+	<bean id="sqlSessionFactroy" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据源配置(ref的值就是配置数据源的id) -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 注入别名配置(给实体类别名，默认类名首字母小写) -->
+		<property name="typeAliasesPackage" value="com.wust.web.pojo"></property>
+		<!-- 注入映射资源路径(在映射文件中写SQL语句) -->
+		<property name="mapperLocations" value="classpath:com/wust/web/mapper/*.xml"></property>	
+	</bean>
+	
+	<!-- 用于扫描mapper的解析器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.wust.web.mapper"></property>
+		<!-- value值对应的是配置SqlSessionFactory的id -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactroy"></property>
+	</bean>
+	
+	
+	
+	
+	
+</beans>
+
+
+
+
+

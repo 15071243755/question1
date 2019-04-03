@@ -1,0 +1,17 @@
+.login_box{
+	height: 350px;
+	border: 1px solid gainsboro;
+	margin-top: 170px;
+	border-radius: 5% ;
+}
+
+
+.show_btn{
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.show_btn:hover{
+	color: green;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <!-- 指定mysql驱动(路径中不能包含中文) -->
+  <classPathEntry location="D:\mysql-connection-jar\mysql-connector-java-5.1.39-bin.jar"></classPathEntry>
+  <context id="context1" >
+  	<commentGenerator>
+  		<!-- 是否抑制所有的注释 -->
+  		<property name="suppressAllComments" value="true"/>
+  	</commentGenerator>
+  	<!-- jdbc配置 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/question1" userId="root" password="" />
+    <!-- Java模型(实体类)生成位置 
+    		targetPackage:指定实体类生成后所在的包名
+    		targetProject:指定实体类生成到所在的项目名-->
+    <javaModelGenerator targetPackage="com.wust.web.pojo" targetProject="question1" />
+    <!-- 配置映射接口(mapper接口) -->
+    <sqlMapGenerator targetPackage="com.wust.web.mapper" targetProject="question1" />
+    <!-- 配置sql的映射文件(mapper中的映射文件) -->
+    <javaClientGenerator targetPackage="com.wust.web.mapper" targetProject="question1" type="XMLMAPPER" />
+    <!-- 配置映射信息
+    		schema:数据库的实例
+    		tableName:数据库中的表名
+    		domainObjectName:给实体类重命名，默认情况是和数据表名一致，可以不写
+    		enableSelectByExample, enableCountByExample="false":不需要什么。。。-->
+    <!-- <table schema="shopping" tableName="goods" enableSelectByExample="false" enableCountByExample="false" >
+      列重写
+    	   column:数据库列名
+    	   property:实体类类名
+      <columnOverride column="???" property="???" />
+    </table> -->
+    <table schema="question1" tableName="user" enableSelectByExample="false" enableCountByExample="false" >
+      <!-- 列重写
+    	   column:数据库列名
+    	   property:实体类类名 -->
+      <columnOverride column="???" property="???" />
+    </table>
+  </context>
+</generatorConfiguration>
